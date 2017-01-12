@@ -5,8 +5,10 @@
     xmlns:local="using:BinaryClock"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="using:BinaryClock.Views"
     mc:Ignorable="d">
 
     <Grid Background="{Binding BackgroundBrush}">
+        <views:BinaryListView BinaryData="{Binding TestData}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
     </Grid>
 </Page>

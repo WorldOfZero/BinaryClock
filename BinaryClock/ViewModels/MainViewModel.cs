@@ -35,6 +35,12 @@ namespace BinaryClock.ViewModels
             }
         }
 
+        private IEnumerable<bool> testData = new[] { false, false, false, false, false, false, true, false };
+
+        public IEnumerable<bool> TestData {
+            get { return testData; }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }
