@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BinaryClock.Converter;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -35,7 +36,7 @@ namespace BinaryClock.ViewModels
             }
         }
 
-        private IEnumerable<bool> testData = new[] { false, false, false, false, false, false, true, false };
+        private IEnumerable<bool> testData = IntegerToBooleanArrayConverter.ConvertToBools(16, 6);
 
         public IEnumerable<bool> TestData {
             get { return testData; }
