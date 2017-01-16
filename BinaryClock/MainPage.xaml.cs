@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using BinaryClock.Converter;
 using BinaryClock.ViewModels;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -26,14 +27,43 @@ namespace BinaryClock
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        MainViewModel viewModel = new MainViewModel();
-        Task colorUpdateTask;
+        readonly MainViewModel viewModel = new MainViewModel();
+        readonly Task colorUpdateTask;
+        readonly DispatcherTimer clock;
 
         public MainPage()
         {
             this.InitializeComponent();
             this.DataContext = viewModel;
             colorUpdateTask = BeginColorUpdate(viewModel);
+            clock = CreateClock();
+        }
+
+        private DispatcherTimer CreateClock()
+        {
+            var clock = new DispatcherTimer();
+            clock.Interval = TimeSpan.FromSeconds(1);
+            clock.Tick += (o, e) => {
+                UpdateViewModelForCurrentTime(viewModel, DateTime.Now);
+            };
+            clock.Start();
+            return clock;
+        }
+
+        private void UpdateViewModelForCurrentTime(MainViewModel mainViewModel, DateTime currentTime)
+        {
+            var seconds = new int[] { currentTime.Second / 10, currentTime.Second % 10 };
+            var minutes = new int[] { currentTime.Minute / 10, currentTime.Minute % 10 };
+            var hour = new int[] { currentTime.Hour / 10, currentTime.Hour % 10 };
+
+            mainViewModel.TimeData = new List<IEnumerable<bool>>() {
+                IntegerToBooleanArrayConverter.ConvertToBools(hour[0], 2),
+                IntegerToBooleanArrayConverter.ConvertToBools(hour[1], 4),
+                IntegerToBooleanArrayConverter.ConvertToBools(minutes[0], 3),
+                IntegerToBooleanArrayConverter.ConvertToBools(minutes[1], 4),
+                IntegerToBooleanArrayConverter.ConvertToBools(seconds[0], 3),
+                IntegerToBooleanArrayConverter.ConvertToBools(seconds[1], 4)
+            };
         }
 
         private Task BeginColorUpdate(MainViewModel viewModel)

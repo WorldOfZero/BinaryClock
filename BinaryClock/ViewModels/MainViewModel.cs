@@ -36,10 +36,17 @@ namespace BinaryClock.ViewModels
             }
         }
 
-        private IEnumerable<bool> testData = IntegerToBooleanArrayConverter.ConvertToBools(16, 6);
+        private IEnumerable<IEnumerable<bool>> timeData;
 
-        public IEnumerable<bool> TestData {
-            get { return testData; }
+        public IEnumerable<IEnumerable<bool>> TimeData {
+            get { return timeData; }
+            set {
+                if (timeData != value)
+                {
+                    timeData = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TimeData)));
+                }
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
