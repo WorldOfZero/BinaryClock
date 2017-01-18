@@ -96,6 +96,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converter\BooleanToBrushConverter.cs" />
+    <Compile Include="Converter\DateTimeToBooleanListConverter.cs" />
     <Compile Include="Converter\IntegerToBooleanArrayConverter.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>

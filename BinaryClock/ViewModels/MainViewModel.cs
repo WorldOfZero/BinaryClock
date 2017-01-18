@@ -36,15 +36,16 @@ namespace BinaryClock.ViewModels
             }
         }
 
-        private IEnumerable<IEnumerable<bool>> timeData;
+        private DateTime time;
 
-        public IEnumerable<IEnumerable<bool>> TimeData {
-            get { return timeData; }
+        public DateTime Time
+        {
+            get { return time; }
             set {
-                if (timeData != value)
+                if (time != value)
                 {
-                    timeData = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TimeData)));
+                    time = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Time)));
                 }
             }
         }

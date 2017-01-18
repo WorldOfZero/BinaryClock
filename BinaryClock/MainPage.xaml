@@ -6,10 +6,15 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="using:BinaryClock.Views"
+    xmlns:converter="using:BinaryClock.Converter"
     mc:Ignorable="d">
+    
+    <Page.Resources>
+        <converter:DateTimeToBooleanListConverter x:Key="DateTimeToBooleanList"/>
+    </Page.Resources>
 
     <Grid Background="{Binding BackgroundBrush}">
-        <ItemsControl ItemsSource="{Binding TimeData}" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <ItemsControl ItemsSource="{Binding Time, Converter={StaticResource DateTimeToBooleanList}}" HorizontalAlignment="Center" VerticalAlignment="Center">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal"></StackPanel>
